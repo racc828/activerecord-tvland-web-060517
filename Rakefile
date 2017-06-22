@@ -1,6 +1,8 @@
 require_relative 'config/environment.rb'
 require "sinatra/activerecord/rake"
 
+
+
 namespace :db do
 
   desc "Migrate the db"
@@ -18,4 +20,10 @@ namespace :db do
     connection_details = YAML::load(File.open('config/database.yml'))
     File.delete(connection_details.fetch('database')) if File.exist?(connection_details.fetch('database'))
   end
+
+end
+
+desc "Opens a pry console after loading environment.rb. This is the default task."
+task :console => :environment do
+  pry.Start
 end
